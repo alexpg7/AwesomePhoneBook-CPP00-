@@ -26,19 +26,16 @@ std::string	Contact::first(bool disp)
 	int			len;
 	int			k;
 
-	len = this->firstname.length();
-	for (k = 0; k < 10 && firstname[k]; k++)
-		ret += this->firstname[k];
+	len = firstname.length();
+	if (disp == true)
+	{
+		for (k = 0; k < 10 - len; k++)
+			ret += " ";
+	}
+	for (k = 0; k < len && firstname[k] && k < 10; k++)
+		ret += firstname[k];
 	if (k == 10 && len > 10)
 		ret[9] = '.';
-	if (k <= 9 && disp == true)
-	{
-		while (k <= 9)
-		{
-			ret += ' ';
-			k++;
-		}
-	}
 	return (ret);
 }
 
@@ -48,19 +45,13 @@ std::string	Contact::last()
 	int			len;
 	int			k;
 
-	len = this->lastname.length();
-	for (k = 0; k < 10 && lastname[k]; k++)
-		ret += this->lastname[k];
+	len = lastname.length();
+	for (k = 0; k < 10 - len; k++)
+		ret += " ";
+	for (k = 0; k < len && lastname[k] && k < 10; k++)
+		ret += lastname[k];
 	if (k == 10 && len > 10)
 		ret[9] = '.';
-	if (k <= 9)
-	{
-		while (k <= 9)
-		{
-			ret += ' ';
-			k++;
-		}
-	}
 	return (ret);
 }
 
@@ -70,18 +61,21 @@ std::string	Contact::nick()
 	int			len;
 	int			k;
 
-	len = this->nickname.length();
-	for (k = 0; k < 10 && nickname[k]; k++)
-		ret += this->nickname[k];
+	len = nickname.length();
+	for (k = 0; k < 10 - len; k++)
+		ret += " ";
+	for (k = 0; k < len && nickname[k] && k < 10; k++)
+		ret += nickname[k];
 	if (k == 10 && len > 10)
 		ret[9] = '.';
-	if (k <= 9)
-	{
-		while (k <= 9)
-		{
-			ret += ' ';
-			k++;
-		}
-	}
 	return (ret);
+}
+
+void	Contact::show()
+{
+	std::cout << "FIRST NAME: " << firstname << std::endl;
+	std::cout << "LAST NAME: " << lastname << std::endl;
+	std::cout << "NICKNAME: " << nickname << std::endl;
+	std::cout << "PHONE NUMBER: " << number << std::endl;
+	std::cout << "DARKEST SECRET: " << secret << std::endl;
 }

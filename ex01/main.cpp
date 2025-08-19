@@ -1,8 +1,40 @@
 #include "PhoneBook.hpp"
 
-int	ft_search(PhoneBook *book)
+int	ft_read(std::string read, int lindex)
 {
-	(*book).display();
+	if (read.length() == 1)
+	{
+		if (read[0] > (char)(lindex + '0') || read[0] < '1')
+			return (-1);
+		return ((int)(read[0] - '0'));
+	}
+	return (-1);
+}
+
+int	ft_search(PhoneBook &book)
+{
+	std::string	read;
+	int			lindex;
+	int			index;
+
+	if (book.lindex == 0 && book.full == false)
+	{
+		std::cout << "You have no contacts to search." << std::endl;
+		return (0);
+	}
+	lindex = book.lindex * (book.full == false) + 8 * (book.full == true);
+	while (1)
+	{
+		std::cout << "Choose a contact (by number):" << std::endl;
+		book.display();
+		if (!std::getline(std::cin, read))
+			return (-1);
+		index = ft_read(read, lindex);
+		if (index == -1)
+			std::cout << "Invalid index." << std::endl;
+		else
+			return (book.showindex(index));
+	}
 	return (0);
 }
 
@@ -18,7 +50,7 @@ int	ft_checknum(std::string number)
 	return (0);
 }
 
-int	ft_add(PhoneBook *book)
+int	ft_add(PhoneBook &book)
 {
 	std::string	name;
 	std::string	lastname;
@@ -27,6 +59,14 @@ int	ft_add(PhoneBook *book)
 	std::string	secret;
 	int			check;
 
+	if (book.full == true)
+	{
+		check = book.warning();
+		if (check == -1)
+			return (-1);
+		else if (check == 0)
+			return (0);
+	}
 	std::cout << "Introduce NAME:" << std::endl;
 	if (!std::getline(std::cin, name))
 		return (-1);
@@ -52,7 +92,7 @@ int	ft_add(PhoneBook *book)
 	std::cout << "Introduce DARKEST SECRET:" << std::endl;
 	if (!std::getline(std::cin, secret))
 		return (-1);
-	(*book).add(name, lastname, nickname, number, secret);
+	book.add(name, lastname, nickname, number, secret);
 	return (0);
 }
 
@@ -66,31 +106,30 @@ int	main(void)
 {
 	PhoneBook	book;
 	std::string	comm;
+	int			ret;
 
 	while (1)
 	{
-		std::cout << "Write a command: (ADD, SEARCH, EXIT)" << std::endl;
-		std::getline(std::cin, comm);
+		ret = 0;
+		std::cout << "Write a command (ADD, SEARCH, EXIT):" << std::endl;
+		if (!std::getline(std::cin, comm))
+		{
+			std::cout << "Something went wrong..." << std::endl;
+			return (ft_exit());
+		}
 		if (comm == "EXIT")
 			return (ft_exit());
 		else if (comm == "ADD")
-		{
-			if (ft_add(&book) == -1)
-			{
-				std::cout << "Something went wrong..." << std::endl;
-				return (ft_exit());
-			}
-		}
+			ret = ft_add(book);
 		else if (comm == "SEARCH")
-		{
-			if (ft_search(&book) == -1)
-			{
-				std::cout << "Something went wrong..." << std::endl;
-				return (ft_exit());
-			}
-		}
+			ret = ft_search(book);
 		else
 			std::cout << "Invalid command." << std::endl;
+		if (ret == -1)
+		{
+			std::cout << "Something went wrong..." << std::endl;
+			return (ft_exit());
+		}
 	}
 	return (0);
 }

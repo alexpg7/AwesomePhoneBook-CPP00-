@@ -20,6 +20,7 @@ class Contact
 		std::string	first(bool disp);
 		std::string	last();
 		std::string	nick();
+		void		show();
 };
 
 #endif
