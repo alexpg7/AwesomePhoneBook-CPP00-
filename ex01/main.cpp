@@ -175,7 +175,7 @@ int	main(void)
 			std::cout << "Something went wrong..." << std::endl;
 			return (ft_exit());
 		}
-		comm = ft_trimtext(comm);
+		comm = ft_trimfirst(comm);
 		if (comm == "EXIT")
 			return (ft_exit());
 		else if (comm == "ADD")
