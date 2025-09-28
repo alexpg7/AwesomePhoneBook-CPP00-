@@ -25,7 +25,7 @@ all : $(NAME)
 %.o: %.cpp
 	@$(CC) $(FLAGS) -c $< -o $@
 
-$(NAME)	: $(OBJ) $(INCLUDE)
+$(NAME)	: $(OBJ) $(INCLUDE) Makefile
 	@$(CC) $(CFLAGS) $(OBJ) -o $(NAME)
 	@echo "😃 ${BGREEN}Compiled ${BYEL}$(NAME)"
 
