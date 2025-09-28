@@ -20,7 +20,7 @@ all : $(NAME)
 	@$(CC) $(FLAGS) -c $< -o $@
 
 $(NAME)	: $(OBJ) Makefile
-	@$(CC) $(CFLAGS) $(SRC) -o $(NAME)
+	@$(CC) $(CFLAGS) $(OBJ) -o $(NAME)
 	@echo "😃 ${BGREEN}Compiled ${BYEL}$(NAME)"
 
 fclean: clean
