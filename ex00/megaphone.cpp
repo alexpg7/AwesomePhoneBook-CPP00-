@@ -20,7 +20,6 @@ int	main(int narg, char **argv)
 			std::cout << (char)toupper(argv[i][j]);
 			j++;
 		}
-		std::cout << " ";
 		i++;
 	}
 	std::cout << std::endl;
