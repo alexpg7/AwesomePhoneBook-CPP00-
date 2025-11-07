@@ -7,7 +7,7 @@ A first exercise as an introduction to C++ syntax.
 
 ## ⚒️ Compilation
 
-all exercises can be compilated with the command ``make``
+All exercises can be compilated with the command ``make``
 ```bash
 make
 ```
