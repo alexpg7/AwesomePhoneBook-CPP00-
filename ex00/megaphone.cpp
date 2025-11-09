@@ -8,7 +8,7 @@ int	main(int narg, char **argv)
 
 	if (narg == 1)
 	{
-		std::cout << "* LOUD AND UNBEARABLE FEEDBACK NOISE *\n";
+		std::cout << "* LOUD AND UNBEARABLE FEEDBACK NOISE *" << std::endl;
 		return (0);
 	}
 	i = 1;
